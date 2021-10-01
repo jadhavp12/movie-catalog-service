@@ -35,7 +35,7 @@ public List<CatelogItem> getCatalog(@PathVariable("userId")  String userId){
 
 
         //get all rated movies
-        UserRating ratings= restTemplate.getForObject("http://localhost:8082/rating/users/"+userId, UserRating.class);
+        UserRating ratings= restTemplate.getForObject("http://movie-ratings-service/rating/users/"+userId, UserRating.class);
 
 //        WebClient.Builder builder= WebClient.builder();//create object in main class
 //        RestTemplate restTemplate=new RestTemplate(); // resttemplate is creating object evey time so create object while loading project
@@ -43,7 +43,7 @@ public List<CatelogItem> getCatalog(@PathVariable("userId")  String userId){
 
         //for each movie id get call movie info and get movie details
 return ratings.getUserRating().stream().map(rating -> {
-    MovieItem movie = restTemplate.getForObject("http://localhost:8083/movies/"+rating.getMovieId(), MovieItem.class) ;
+    MovieItem movie = restTemplate.getForObject("http://movie-info-service/movies/"+rating.getMovieId(), MovieItem.class) ;
 
  /*   MovieItem movie= webClientBuilder.build()
             .get()
