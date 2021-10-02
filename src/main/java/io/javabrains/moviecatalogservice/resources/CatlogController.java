@@ -53,7 +53,7 @@ return ratings.getUserRating().stream().map(rating -> {
             .block();*/
 
     //put them all together
-    return new CatelogItem(movie.getMovieId(), movie.getMovieDesc(), rating.getRating());
+    return new CatelogItem(movie.getMovieName(), movie.getMovieDesc(), rating.getRating());
 }).collect(Collectors.toList());
 
 

@@ -4,13 +4,22 @@ public class MovieItem {
 
     private String movieId;
     private String movieDesc;
+    private String movieName;
 
-    public MovieItem(String movieId, String movieDesc) {
+    public MovieItem(){}
+
+    public MovieItem(String movieId, String movieDesc, String movieName) {
         this.movieId = movieId;
         this.movieDesc = movieDesc;
+        this.movieName = movieName;
     }
 
-    public MovieItem() {
+    public String getMovieName() {
+        return movieName;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
     }
 
     public void setMovieId(String movieId) {
