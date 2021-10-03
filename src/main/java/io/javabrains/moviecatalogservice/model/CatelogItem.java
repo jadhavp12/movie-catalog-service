@@ -13,6 +13,10 @@ public class CatelogItem {
         this.rating = rating;
     }
 
+    public  CatelogItem(){
+
+    }
+
     public void setName(String name) {
         this.name = name;
     }
