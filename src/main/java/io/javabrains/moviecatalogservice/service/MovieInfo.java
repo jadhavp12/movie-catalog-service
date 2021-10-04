@@ -1,6 +1,7 @@
 package io.javabrains.moviecatalogservice.service;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import io.javabrains.moviecatalogservice.model.CatelogItem;
 import io.javabrains.moviecatalogservice.model.MovieItem;
 import io.javabrains.moviecatalogservice.model.Rating;
@@ -18,7 +19,12 @@ public class MovieInfo {
     @Autowired
     private RestTemplate restTemplate;
 
-    @HystrixCommand(fallbackMethod = "getCatelogItemFallback")
+    @HystrixCommand(fallbackMethod = "getCatelogItemFallback",
+    threadPoolKey = "movieInfoPool",
+    threadPoolProperties = {
+            @HystrixProperty(name="coreSize",value = "20"),
+            @HystrixProperty(name="maxQueueSize",value = "10")
+    })
     public CatelogItem getCatelogItem(Rating rating) {
         MovieItem movie = restTemplate.getForObject("http://movie-info-service/movies/"+ rating.getMovieId(), MovieItem.class) ;
 
